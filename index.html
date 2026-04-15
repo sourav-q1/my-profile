@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio of sourav mondal</title>
+   
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+:root {
+  --bg: #0f172a;
+  --card: rgba(255,255,255,0.05);
+  --text: #e5e7eb;
+  --muted: rgba(255,255,255,0.7);
+  --primary: #38bdf8;
+  --shadow: rgba(56,189,248,0.2);
+  --border: rgba(56,189,248,0.7);
+}
+
+.light {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: rgba(15,23,42,0.7);
+  --primary: #0ea5e9;
+  --shadow: rgba(14,165,233,0.2);
+  --border: rgba(14,165,233,0.4);
+}
+
+body{
+ background:linear-gradient(-45deg,#0f172a,#1e293b,#020617,#0ea5e9);
+ background-size:400% 400%;
+ animation:bg 10s ease infinite;
+ color:#fff;
+ transition:.3s;
+}
+
+body.light{
+ background:#f1f5f9;
+ color:#000;
+}
+
+@keyframes bg{
+ 0%{background-position:0% 50%}
+ 50%{background-position:100% 50%}
+ 100%{background-position:0% 50%}
+}
+
+header{
+ display:flex;
+ justify-content:space-between;
+ padding:20px 40px;
+ position:sticky;
+ top:0;
+ backdrop-filter:blur(10px);
+ z-index:1000;
+}
+
+nav a{
+ margin-left:20px;
+ text-decoration:none;
+ color:inherit;
+}
+
+.toggle{
+ cursor:pointer;
+ padding:5px 10px;
+ border:1px solid #38bdf8;
+ border-radius:5px;
+}
+
+.hero{
+ height:100vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+}
+
+.hero h2{font-size:3rem}
+.hero span{color:#38bdf8}
+
+button{
+ padding:10px 20px;
+ background:#38bdf8;
+ border:none;
+ border-radius:6px;
+ cursor:pointer;
+ margin-top:15px;
+}
+
+section{padding:80px 10%}
+section{
+ transition: background 0.4s ease, color 0.3s ease, box-shadow 0.3s;
+}
+
+.skills .bar{
+ margin:10px 0;
+}
+
+.bar span{
+   display:block;
+   height:8px;
+   background:#eee;
+   border-radius:5px;
+   overflow:hidden;
+}
+
+.light .bar span{
+   /background:#1e293b;/
+   background:#ccc;
+}
+
+.bar span div{
+ height:100%;
+ width:0;
+ background:#38bdf8;
+}
+
+.projects{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:20px;
+}
+
+.card{
+ background:rgba(255,255,255,0.05);
+ backdrop-filter:blur(10px);
+ padding:20px;
+ border-radius:15px;
+ transition:.4s;
+}
+
+.light .card{
+  background:rgba(255,255,255,1);
+}
+
+.card:hover{
+ transform:translateY(-10px);
+ box-shadow:0 10px 40px rgba(56,189,248,0.4);
+}
+
+.ai-box{
+ background:rgba(255,255,255,0.05);
+ padding:20px;
+ border-radius:15px;
+ text-align:center;
+}
+
+footer{text-align:center;padding:20px}
+
+#about{background:linear-gradient(135deg,#020617,#0f172a)}
+#skills{background:rgba(56,189,248,0.05)}
+#journey{background:rgba(16,185,129,0.05)}
+#projects{background:rgba(168,85,247,0.05)}
+#ai{background:rgba(244,63,94,0.05)}
+#contact{background:#020617}
+
+body.light #about{
+ background:linear-gradient(135deg,#e2e8f0,#f8fafc);
+}
+
+body.light #skills{
+ background:rgba(56,189,248,0.1);
+}
+
+body.light #journey{
+ background:rgba(16,185,129,0.1);
+}
+
+body.light #projects{
+ background:rgba(168,85,247,0.1);
+}
+
+body.light #ai{
+ background:rgba(244,63,94,0.1);
+}
+
+body.light #contact{
+ background:#e2e8f0;
+}
+
+body.light section{
+ color:#0f172a;
+}
+
+section:hover{
+ box-shadow:0 0 50px rgba(56,189,248,0.1);
+ transition:.3s;
+}
+
+.terminal{
+ background:rgba(0,0,0,0.4);
+ border:1px solid rgba(56,189,248,0.3);
+ padding:20px;
+ border-radius:10px;
+ width:fit-content;
+ margin-top:15px;
+ backdrop-filter:blur(10px);
+ font-family:monospace;
+ text-align:left;
+}
+
+.line{
+ margin:5px 0;
+ color:#94a3b8;
+}
+
+.green{
+ color:#22c55e;
+ font-weight:bold;
+}
+
+/* blinking cursor */
+#typing::after{
+ content:" |";
+ animation:blink 0.8s infinite;
+}
+
+@keyframes blink{
+ 50%{opacity:0}
+}
+
+.boot{
+ color:#38bdf8;
+ font-weight:bold;
+ margin-bottom:10px;
+}
+
+body.light .terminal{
+ background:rgba(255,255,255,0.7);
+ border:1px solid rgba(15,23,42,0.2);
+ color:#0f172a;
+ box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+body.light .line{
+ color:#334155;
+}
+
+body.light .green{
+ color:#16a34a;
+}
+
+.terminal{
+ backdrop-filter:blur(12px);
+ border-radius:12px;
+ padding:20px;
+ transition:all 0.3s ease;
+}
+
+#about h2,
+#projects h2{
+  margin-bottom: 20px;
+}
+
+#journey .timeline{
+  position:relative;
+  margin-top:30px;
+  padding-left:30px;
+  border-left: 2px solid var(--border);
+  box-shadow: 0 0 10px var(--shadow);
+}
+
+/* each item */
+#journey .item{
+  position:relative;
+  margin-bottom:40px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.6s ease;
+}
+
+#journey .item .content ul{
+  margin-left: 30px;
+}
+
+#journey .item.show{
+ opacity:1;
+ transform:translateY(0);
+}
+
+#journey .item.active .content{
+  border:1px solid var(--primary);
+  box-shadow:0 0 20px var(--shadow);
+}
+
+/* dot */
+#journey .dot{
+  position:absolute;
+  left:-38px;
+  top:21%;
+  transform:translateY(-50%);
+  width:14px;
+  height:14px;
+  background:var(--primary);
+  border-radius:50%;
+  box-shadow:0 0 10px var(--primary);
+}
+
+/* content box */
+#journey .content{
+  background:var(--card);
+  color:var(--text);
+  padding:15px 20px;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+#journey .content:hover{
+  transform:translateX(8px) scale(1.01);
+}
+
+/* headings */
+#journey .content h3{
+ color:#38bdf8;
+ margin-bottom:10px;
+}
+
+
+.section-subtitle {
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.ai-box {
+  background: var(--card);
+  color: var(--text);
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.ai-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px var(--shadow);
+}
+.ai-box h3 {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.ai-box ul {
+  margin-top: 10px;
+  padding-left: 18px;
+  opacity: 0.8;
+  list-style: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Sourav Mondal</h2>
+<nav>
+<a href="javascript:void(0);" onclick="scrollToSection('about');">About</a>
+<a href="javascript:void(0);" onclick="scrollToSection('skills');">Skills</a>
+<a href="javascript:void(0);" onclick="scrollToSection('journey');">Journey</a>
+<a href="javascript:void(0);" onclick="scrollToSection('projects');">Projects</a>
+<a href="javascript:void(0);" onclick="scrollToSection('ai');">AI</a>
+<a href="javascript:void(0);" onclick="scrollToSection('contact');">Contact</a>
+</nav>
+<div class="toggle" onclick="toggleMode()">☀️</div>
+</header>
+
+<div class="hero">
+<h2>Hi, I'm <span>sourav</span></h2>
+<p class="boot">SYSTEM BOOT COMPLETE ✔</p>
+<div class="terminal">
+  <p class="line">> Initializing portfolio...</p>
+  <p class="line">> Loading profile data...</p>
+  <p class="line">> Status: <span class="green">Active</span></p>
+  <p class="line">> Role: <span id="typing"></span></p>
+</div>
+<button onclick="scrollToSection('projects')">View My Work</button>
+</div>
+
+<section id="about">
+<h2>About Me</h2>
+<p>I am a Cyber Forensics (CFS) student from West Bengal with a strong interest in web development and artificial intelligence. I enjoy building clean, responsive, and interactive websites using HTML, CSS, and JavaScript.</p>
+<p>Currently, I am expanding my skills into Python and Machine Learning to understand how intelligent systems work and how real-world AI applications are built.</p>
+<p> My focus is on learning by doing — developing projects, improving UI/UX design, and strengthening my problem-solving skills through consistent practice.</p>
+<p>I am passionate about becoming a well-rounded developer who can work across frontend development and AI-driven technologies in the future.</p>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+
+<div class="skills">
+<div class="bar">HTML<span><div style="width:90%"></div></span></div>
+<div class="bar">CSS<span><div style="width:85%"></div></span></div>
+<div class="bar">JavaScript<span><div style="width:80%"></div></span></div>
+<div class="bar">Python<span><div style="width:60%"></div></span></div>
+</div>
+
+</section>
+
+<section id="journey">
+  <h2>My Learning Journey</h2>
+  <div class="timeline">
+    <div class="item">
+      <div class="dot"></div>
+      <div class="content">
+        <h3>Phase 1: Foundations</h3>
+        <ul>
+          <li>Learned HTML structure and semantic tags</li>
+          <li>Understood CSS styling and responsive design</li>
+          <li>Practiced JavaScript basics for interactivity</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item">
+      <div class="dot"></div>
+      <div class="content">
+        <h3>Phase 2: Project Building</h3>
+        <ul>
+          <li>Created responsive portfolio websites</li>
+          <li>Built UI components and layouts</li>
+          <li>Improved real-world frontend understanding</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item">
+      <div class="dot"></div>
+      <div class="content">
+        <h3>Phase 3: Current Focus</h3>
+        <ul>
+          <li>Learning Python programming</li>
+          <li>Exploring Machine Learning concepts</li>
+          <li>Understanding basic AI models</li>
+        </ul>
+      </div>
+    </div>
+    <div class="item">
+      <div class="dot"></div>
+      <div class="content">
+        <h3>Future Goal</h3>
+        <ul>
+          <li>Become an AI/ML Engineer</li>
+          <li>Build intelligent real-world applications</li>
+          <li>Master full-stack development</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+
+<div class="projects">
+
+<div class="card">
+<h3>Portfolio Website</h3>
+<p>Modern animated portfolio</p>
+<a href="#"><button>Live</button></a>
+<a href="#"><button>GitHub</button></a>
+</div>
+
+<div class="card">
+<h3>Malware Detector</h3>
+<p>AI-based malware detection</p>
+<a href="#"><button>GitHub</button></a>
+</div>
+
+</div>
+</section>
+
+<section id="ai">
+  <h2>AI Showcase</h2>
+  <p class="section-subtitle">
+    A collection of my early AI and Machine Learning project ideas and experiments.
+  </p>
+
+  <div class="ai-grid">
+
+    <div class="ai-box">
+      <h3>Malware Detection AI</h3>
+      <p>ML model designed to classify files as safe or malicious based on patterns and features extracted from data.</p>
+      <ul>
+        <li>Type: Classification Model</li>
+        <li>Tech: Python, Scikit-learn</li>
+        <li>Goal: Cybersecurity automation</li>
+      </ul>
+    </div>
+
+    <div class="ai-box">
+      <h3>Spam Email Detector</h3>
+      <p>Detects spam emails using natural language processing and text classification techniques.</p>
+      <ul>
+        <li>Type: NLP Project</li>
+        <li>Tech: Python, NLTK</li>
+        <li>Goal: Improve email filtering accuracy</li>
+      </ul>
+    </div>
+
+    <div class="ai-box">
+      <h3>Student Performance Predictor</h3>
+      <p>Predicts student academic performance based on study hours and past results.</p>
+      <ul>
+        <li>Type: Regression Model</li>
+        <li>Tech: Python, Pandas, Scikit-learn</li>
+        <li>Goal: Educational analytics</li>
+      </ul>
+    </div>
+
+    <div class="ai-box">
+      <h3>Basic Chatbot</h3>
+      <p>A simple rule-based chatbot that responds to user queries using predefined logic.</p>
+      <ul>
+        <li>Type: Conversational AI</li>
+        <li>Tech: Python</li>
+        <li>Goal: Understand chatbot logic</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: sm4599961@gmail.com</p>
+<p>GitHub: https://github.com/sourav-q1</p>
+</section>
+
+<footer>
+<p>© 2026 Sourav</p>
+</footer>
+
+<script>
+
+// DARK MODE
+function toggleMode(){
+ document.body.classList.toggle("light");
+
+ const toggle=document.querySelector(".toggle");
+ toggle.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+}
+
+function scrollToSection(id){
+ document.getElementById(id).scrollIntoView({
+  behavior: "smooth"
+ });
+}
+
+// TYPING
+const roles=[
+"AI/ML Enthusiast",
+"CFS Student",
+"Creative Builder",
+"Problem Solver"
+];
+
+let i=0;
+let j=0;
+let current="";
+let isDeleting=false;
+
+function type(){
+ current=roles[i];
+
+ if(!isDeleting){
+  document.getElementById("typing").innerHTML =
+  current.substring(0,j++);
+  
+  if(j>current.length){
+    isDeleting=true;
+    setTimeout(type,1000);
+    return;
+  }
+ }
+ else{
+  document.getElementById("typing").innerHTML =
+  current.substring(0,j--);
+
+  if(j<0){
+    isDeleting=false;
+    i=(i+1)%roles.length;
+  }
+ }
+
+ setTimeout(type,isDeleting?50:100);
+}
+
+type();
+
+// GSAP ANIMATIONS
+gsap.from(".hero h2",{y:-50,opacity:0,duration:1})
+gsap.from(".hero p",{opacity:0,delay:.5})
+gsap.from("section",{opacity:0,y:50,stagger:.3,duration:1})
+
+const items=document.querySelectorAll(".item");
+
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){
+   entry.target.classList.add("show");
+  }
+ });
+},{threshold:0.2});
+
+items.forEach((item, index) => {
+  item.style.transitionDelay = ${index * 0.1}s;
+  observer.observe(item);
+});
+
+
+
+</script>
+
+</body>
+</html>
